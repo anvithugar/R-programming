@@ -1,0 +1,450 @@
+![](C:\Users\anvit\OneDrive\Desktop\USdublin\DBS-logo-fit.png)
+
+
+
+---
+title: "Assignment 2"
+author: "Anvit Hugar - 10516794"
+output: html_document
+---
+
+```{r global_options, include=FALSE, cache=FALSE}
+library(knitr)
+opts_chunk$set(echo=TRUE, 
+               warning=FALSE, 
+               message=FALSE,
+               cache = FALSE,
+               include = TRUE,
+               results = 'show',
+               error = TRUE)
+```
+
+## Introduction:
+
+My answers to Assignment 2 for B9DA100 are found below.
+
+### Question 1:
+
+Load the MASS library, and access the Cars93 dataset.
+```{r}
+install.packages("MASS", repos = "http://cran.us.r-project.org")
+library(MASS)
+data("Cars93")
+head(Cars93)
+```
+
+#### 1.1
+
+In 1.1,  we need to Produce two different plots from the Cars93 dataset - each plot can be contained in a
+single panel, or a plot can be spread over two or more panels if necessary (these are
+called multipanel plots - e.g., side-by-side barcharts). Your plots should be neat and
+presentable, clearly labelled, and use colour and relevant legends where appropriate.
+Your two plots must be of different types
+
+**plot1**
+```{r}
+
+colors=c(59,535,"red")                    #assigning coral2,peru and red to colors
+boxplot(Cars93$Price~Cars93$AirBags,xlab='Airbags', xaxt="n",   #creating boxplot for price against Airbags
+        ylab='Average Price in Thousands of Dollars',                                      
+        main='Vehicle price by Airbags',font.main=3, col=colors, cex.lab=1,border="blue")
+axis(side=1,                                  #change the font style to present the       
+     at=1:3,                                  #plot neat.
+     labels = c("Driver & Passenger", "Driver", "No Airbags"),
+     font.axis=3)
+
+
+
+
+
+```
+
+
+**plot2**
+```{r}
+hist(Cars93$Price, breaks = 10,           #creating the histgram for car price with 10 break between the price
+     xlab = "Price in US Dollars",
+     main = "Histogram of Cars price in US",
+     col = "palevioletred")
+```
+
+
+
+#### 1.2
+
+In 1.2, we need to Write 3 to 4 sentences for each plot to explain what it tells us about the dataset.
+
+In the question 1.1, The first plot represents the price of the cars depending on the Airbags. We can obverse that the price of the cars are high for cars having Airbags for both Driver and Passenger. similiarly for Cars without Airbags price is comparitively low.
+
+For the second plot, I have created a Histogram of cars price. we can observe that more number of cars price are in the range of 15 to 20 thousand dollar and there are fewer cars in the range above 60 thousand dollars. From the plot we can say that almost 30 cars are in the range 15 to 20 thousand dollars.
+
+
+
+
+
+
+### Question 2
+
+#### 2.1
+
+In 2.1, Load the DAAG library and access the leafshape dataset contained in it. Load the
+help file and read about the dataset. In what country is the data collected?
+
+```{r}
+install.packages("DAAG", repos = "http://cran.us.r-project.org")
+library(DAAG)
+data("leafshape")
+help(leafshape)
+
+
+```
+
+The data was collected from **Australia.**
+
+
+#### 2.2
+
+In 2.2, A researcher is interested in seeing if there is a relationship between the blade length
+of the biomass and the location where it is growing. so, we need to create a plot containing boxplots
+of the blade length variable, grouped by location.
+
+
+```{r}
+
+leafy_ln <- table(leafshape$bladelen, leafshape$location)                  
+par(mar = c(3.5, 3.5, 2.5, 1.5), mgp = c(2, 0.6, 0), las = 1)                 
+boxplot(leafshape$bladelen~leafshape$location,xaxt="n",     #creating the boxplot for bladelength and location
+        main="Different boxplots for each location",
+        xlab="Location Names", ylab="Baldelength",
+        col=c(3,4,5,6,7,8), cex= 0.7, font.lab=4,
+        border="362")
+legend("topright", legend = c("Sabah","Panama","Costa Rica","N Queensland", "S Queensland", "Tasmania"),  
+ fill =c(3,4,5,6,7,8))                                                                                    
+  axis(side = 1,                  #using axis to present the plot neat and clear
+       at = 1:6,                                                                                
+       labels = c("Sabah","Panama","Costa Rica","N Queensland", "S Queensland", "Tasmania"),
+       cex.axis=.8,
+       cex= 1,
+       col.axis="black",
+       font.axis=6)
+  
+
+
+```
+
+#### 2.3
+
+In 2.3, we need to Comment on the resulting graph. What information does it illustrate?
+
+In the question we are asked to create a plot containing boxplots of the blade length variable, grouped by location. In the plot      we can observe that blade length of leaf in Costa Rica are comparitively high than the other location and Tasmania is at the          least position having the blade length lower than 10mm. In the location Panama we can observe more number of outliers.
+
+
+
+
+
+
+### Question 3 
+
+#### 3.1
+
+In 3.1, Set x to be 2 and y to be 10. Write a while() loop which prints x+y and then squares
+x and doubles y. The loop should stop when either x is greater than or equal to 40,
+or y is greater than or equal to 40. What value is x now?
+
+```{r}
+  x=2
+  y=10
+  while(x<= 40 | y <= 40){  #while loop stops when either x or y is greater than or equal to 40
+        
+           print(x+y)     #prints sum of x and y
+          x = x^2         # x value is squired and store in x
+          y = 2*y         # y is multiplied by 2 and stored in y
+  }
+  
+```
+
+```{r}
+
+cat("The Value of x is", x,"\n")
+  
+```
+
+
+#### 3.2
+
+In 3.2, we need to create an array of size 3 x 4 x 5. Write a for() loop which fills this array indicating
+whether the sum of the indexes for that entry is divisible by 3. e.g., the [2, 1, 3] entry
+should be labelled \Div.by.3" since 2 + 1 + 3 = 6, and 6 is divisble by 3, whereas the
+[1, 1, 2] entry should be \Not.div.by.3" since 1 + 1 + 2 = 4 and 4 is not divisble by 3.
+When finished, print the middle face (also known as a slice) of the array.
+
+```{r}
+res1<-array(1:24, dim=c(3,4,5))   #creating array of 3x4x5
+for(row in 1:nrow(res1)){         #for loop for filling the array        
+  for(col in 1:ncol(res1)){
+    for(i in 1:5){
+      if(((row+col+i)%%3)==0)     #applying if condition to satisfy divisiblity condition
+      {
+        res1[row,col,i]<-"Div.by.3"    
+      }
+    else{
+      res1[row,col,i]<-"Not.div.by.3"
+    }
+      }
+  }
+}
+
+print(res1[,,3])                  #printing middle face of the array
+
+```
+
+
+
+#### 3.3
+
+In 3.4, Set i to be 3. Write a repeat() loop which trebles i until i is greater than 100. What
+value is i now?
+
+```{r}
+i <- 3                         #initializing i to 3
+repeat{                        #repeat loop for trebling i until i >100
+        i <- i * 3              
+        if(i > 100) break
+}
+cat("The Value of i is", i,"\n")  #printing the value of i
+
+```
+
+### Question 4
+
+In 4, Using the RCurl package and the getURL() function (or otherwise), read in the code
+from the following webpage: https://www.imdb.com/chart/top.
+
+```{r}
+install.packages("RCurl", repos = "http://cran.us.r-project.org")
+library(RCurl)
+IMDB<-getURL("https://www.imdb.com/chart/top")
+IMDB <- strsplit(IMDB, "\n")[[1]]
+head(IMDB)
+
+```
+
+
+
+#### 4.1
+
+In 4.1, In how many of the top 250 films does the actress Grace Kelly appear? What are the
+names of these films?
+
+```{r}
+moviegrace<-length(grep('Grace Kelly', IMDB))      #retrieving the length of character Grace Kelly
+cat("Number of movies the actress Grace Kelly appeared is", moviegrace,"\n")   #printing the length
+GraceMovies <- IMDB[grep("Grace Kelly", IMDB)]     #retrieving title, dir, actors and movie name  
+gsub('.* >|</a>','', GraceMovies)     #retrieving only the name
+
+
+```
+The names of the films are **Rear Window** and **Dial M for Murder**
+
+#### 4.2
+
+In 4.2, Extract all of the film titles into a vector of length 250, where the first element of the
+vector is the first film in the ranking, etc. Print the first 6 entries of this vector. How
+many films have `A' as the first word of their title?
+
+```{r}
+movies <- grep(("\\(dir.\\)"),IMDB,value = TRUE)  #retrieving all the movies       
+mov1 <- regexpr(">",movies)     #returning vector indicating character position matching >
+mov2 <- regexpr("<",movies)     #returning vector indicating character position matching <
+films <- substr(movies, mov1+1,mov2-1)      #taking substring or middle value from > and < character  
+head(films)                     #printing 6 films 
+
+tmp <- (strsplit(films, " "))   #spliting the string
+tmp1 <- unlist(lapply(tmp, function(x) x[1]))  #Unlisting the characters
+table(tmp1)['A']            #creating table of characters of only A
+```
+
+***Two** films have `A' as the first word of their title.
+
+
+#### 4.3
+
+In 4.3, In how many of the top 250 films does the director have S as the first letter of their
+first name?
+
+```{r}
+data1 <- IMDB[grep("(dir.)", IMDB)]       #retrieving all the movies 
+director <- gsub(".*=\"| \\(dir.).*","", data1) #retrieving on directors name
+length(director[grep('^S', director)])  #printing number of directors starting with s character
+table(director[grep('^S', director)])   #printing name and movies directors starting with s character
+```
+
+**28** of the top 250 films does the director have S as the first letter of their first name.
+
+
+#### 4.4
+
+In 4.4, How many of the top 250 films have a score of 8.4 or greater?
+
+```{r}
+rating <- IMDB[grep("ratings", IMDB)]       #retrieving all the movie ratings 
+ratingScore <- gsub('.*">|</strong>' ,'', rating)  #retrieving only the rating
+ratingScore <- ratingScore[-c(251:252)]   #removing last to values
+X<-ratingScore >= 8.4      #filtering the rating more then 8.4
+sum(X)        #number of films having rating 8.4 or greater
+
+```
+
+There are **66** of the top 250 films have a score of 8.4 or greater
+
+
+#### 4.5
+
+In 4.5, What is the mean number of user ratings used to define the top 250 films?
+
+```{r}
+userrating<- grep("user rating", IMDB, value = T) #retrieving all the movie ratings and userratings   
+temp1 <- regexpr("( on )", userrating)    #returning vector indicating character position matching on
+temp2 <- regexpr("( user )", userrating)  #returning vector indicating character position matching user
+temp <-substr(userrating, temp1+4, temp2-1) #retrieving on the user rating 
+temp<- gsub("," , "", temp)   #removing comma    
+cat("Mean number of user rating is:",mean(as.numeric(temp)),"\n") #printing mean of the user rating
+```
+
+
+
+### Question 5
+
+#### 5.1
+
+In 5.1, Read the dataset in and call it dublin. Assign to the dublin object the classes
+pop.data and data.frame (in that order). (The read.csv() function is the best way
+to read in the data.)
+
+```{r}
+setwd("C:/Users/anvit/OneDrive/Desktop/CA2 R")  #changing my directory where my files are located
+dublin<-read.csv(file="Dublin.csv",header =TRUE, row.names = 1)   #read the csv file
+class(dublin)<-c("pop.data","data.frame") #assigning dublin to classes pop.data and data.frame
+class(dublin)
+
+```
+
+
+#### 5.2
+
+In 5.2, Write an S3 summary method for an object of class pop.data which displays the
+following statistical summaries for the Male and the Female variables: minimum, max-
+imum, and mean population count. The years corresponding to the minima and max-
+ima should also be printed for both variables. This summary should be neat and clear,
+and easy to read and understand.
+
+```{r}
+
+summary.pop.data <- function(data) {  #creating function summary to display all the summaries asked in question
+  cat("Year:",rownames(data)[data$Male == max(data$Male)],"Maximum Of Males:",max(data$Male),"\n")      
+  cat("Year:",rownames(data)[data$Male == min(data$Male)],"Minimum Of Males:",min(data$Male),"\n")      
+  cat("Year:",rownames(data)[data$Female == max(data$Female)],"Maximum Of Females:",max(data$Female),"\n")
+  cat("Year:",rownames(data)[data$Female == min(data$Female)],"Minimum Of Females:",min(data$Female),"\n")
+  cat("Mean Of Males:",mean(data$Male),"\n")
+  cat("Mean Of Females:",mean(data$Female),"\n")
+  cat("Mean Of Total Population:",mean(data$Total),"\n")
+}
+
+```
+
+
+
+#### 5.3
+
+In 5.3, Test your summary method by running the code summary(dublin).
+
+```{r}
+
+summary(dublin)
+
+```
+
+
+
+#### 5.4
+
+In 5.4, Create an S3 plot method for the class pop.data that produces the following plot:
+
+* A line plot (a time series plot) containing two lines to show the population trend
+  for males and females
+
+* By default, the plot will draw a red line for males and a blue line for females -
+  the user must be able to change these colours if desired
+
+* The plot must include meaningful labels for the axis and legend
+
+* The plot should be neat and clear and be easy to interpret - pay attention to
+  distances between the plot edge and the plotting panel on all sides, the orientation
+  of numbers, the position of titles, the default width of lines on the plot etc.
+  
+* The method should also include a generic title by default, but allow the user to
+  include their own title as an argument if desired.
+  
+* Your code should not `hard-code' numbers into it unnecessarily - e.g., if a longer
+  or shorter dataset is supplied to it, it should be able to plot this without any
+  errors  
+
+```{r}
+options(scipen=5) #changing the option settings to get the absolute value not e powers
+plot.pop.data <- function(data, MaleColor, FemaleColor,title) {
+  par(mar = c(6.5, 6.5, 2.5, 0.5), mgp = c(4.5, 1, 0),las=2) #setting the margins
+  Year=rownames(data) #getting the rownames for axis setting
+  #plotting the time series with male and female
+  ts.plot(window(data$Male),
+          window(data$Female),
+          main=paste(title),
+          gpars=list(xlab="Year",
+                     ylab="Population Trends",
+                     pch=200,
+                     col=c(MaleColor, FemaleColor),
+                     lwd=2,xaxt='n'))
+  
+  axis(1, at=1:length(Year), labels=Year) #setting the axis of plot
+  legend("top",
+         bty="n",
+         c("Male", "Female"),
+         lty=c(1, 1),
+         lwd=c(2, 2),
+         col=c(MaleColor, FemaleColor))}
+```
+
+
+
+#### 5.5
+
+In 5.5, Test your plot method by running plot(dublin). Include a user-specified title relevant
+to this dataset in your arguments.
+
+```{r}
+plot(dublin, "4","6","Poplation Trends For Males and Female in Dublin")
+```
+
+
+#### 5.6
+
+In 5.6, The file Mayo.csv contains similar information on population figures from 1861 to
+2016 in the county of Mayo. Load the dataset, call it mayo, and assign it the two
+classes pop.data and data.frame as before. Run summary(mayo) and plot(mayo)
+to test your two methods (including an appropriate title for the plot). Interpret the
+findings, commenting on any differences or similarites between the two summaries and
+two plots.
+
+```{r}
+setwd("C:/Users/anvit/OneDrive/Desktop/CA2 R")
+mayo<-read.csv(file="Mayo.csv",header =, row.names = 1)
+class(mayo)<-c("pop.data","data.frame")
+class(mayo)
+
+summary(mayo)
+
+plot(mayo,"blue","red","Poplation Trends For Males and Female in Mayo")
+```
+
+-----------------------------------------------------
+### End of Assignment
+
